@@ -1,0 +1,10 @@
+parameters:
+	level: 9
+	paths:
+		- src
+		- tests
+	ignoreErrors:
+	    - '#Dynamic call to static method PHPUnit\\Framework\\Assert::assert#'
+	    - '#::setup\(\) does not match parent method name: ApiPlatform\\Symfony\\Bundle\\Test\\ApiTestCase::setUp\(\)#'
+	strictRules:
+	    booleansInConditions: false

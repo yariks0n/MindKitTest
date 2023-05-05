@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Security">
+    <description>Правила для статического анализа кода</description>
+
+    <!-- Директории для проверки -->
+     <file>./src/</file>
+
+    <!-- Исключения -->
+    <exclude-pattern type="relative">^vendor/*</exclude-pattern>
+
+    <!-- Расширения -->
+    <arg name="extensions" value="php"/>
+
+    <!-- Настройки отчета -->
+    <arg name="report" value="full"/>
+    <arg name="colors"/>
+    <arg value="sp"/>
+
+    <!-- Настройка повышенных требований для правил. Не все правила её учитывают -->
+    <!-- <config name="ParanoiaMode" value="1"/> -->
+
+    <!--
+
+    ### ПРАВИЛА ###
+
+    -->
+
+    <!-- Совместимость версий -->
+    <rule ref="PHPCompatibility"/>
+    <config name="testVersion" value="8.0-"/>
+
+    <!-- PSR -->
+    <rule ref="PSR1"/>
+    <rule ref="PSR12"/>
+
+    <!-- XSS -->
+    <rule ref="Security.BadFunctions.EasyXSS">
+        <properties>
+            <property name="forceParanoia" value="1"/>
+        </properties>
+    </rule>
+
+    <!-- RFI -->
+    <rule ref="Security.BadFunctions.EasyRFI"/>
+
+    <!-- Функция assert не должна вызываться с динамическими параметрами -->
+    <rule ref="Security.BadFunctions.Asserts"/>
+
+    <!-- Использование обратных апострофов с динамическими параметрами недопустимо -->
+    <rule ref="Security.BadFunctions.Backticks"/>
+
+    <!-- Функция eval не должна вызываться с динамическими параметрами -->
+    <rule ref="Security.BadFunctions.NoEvals"/>
+
+    <!-- Функция phpinfo не должна использоваться -->
+    <rule ref="Security.BadFunctions.Phpinfos"/>
+
+    <!-- Функция preg_replace не должна использоваться с входящими данными или модификатором /e -->
+    <rule ref="Security.BadFunctions.PregReplace"/>
+
+    <!-- SQL не должен содержать динамические параметры -->
+    <rule ref="Security.BadFunctions.SQLFunctions"/>
+
+    <!-- Системные вызовы не должны использовать динамические параметры -->
+    <rule ref="Security.BadFunctions.SystemExecFunctions"/>
+
+    <!-- Нельзя использовать хедер Access-Control-Allow-Origin со значением * -->
+    <rule ref="Security.Misc.BadCorsHeader"/>
+
+    <!-- Неиспользуемые переменные скриптов -->
+    <rule ref="SlevomatCodingStandard.Variables.UnusedVariable"/>
+
+    <!-- Бесполезные значения переменных -->
+    <rule ref="SlevomatCodingStandard.Variables.UselessVariable"/>
+
+    <!-- Неиспользуемые use -->
+    <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses"/>
+
+    <!-- Только одна декларация namespace на файл -->
+    <rule ref="SlevomatCodingStandard.Namespaces.RequireOneNamespaceInFile"/>
+
+    <!-- Запрет на ведущий \ в use -->
+    <rule ref="SlevomatCodingStandard.Namespaces.UseDoesNotStartWithBackslash"/>
+
+    <!-- Неиспользуемые переменные функции -->
+    <rule ref="SlevomatCodingStandard.Functions.UnusedParameter"/>
+
+    <!-- Бесполезные значения аргументов функции по умолчанию, например ?$arg = null -->
+    <rule ref="SlevomatCodingStandard.Functions.UselessParameterDefaultValue"/>
+
+    <!-- Один пробел перед типом возвращаемого значения -->
+    <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing"/>
+
+    <!-- Запрет пустого комментария -->
+    <rule ref="SlevomatCodingStandard.Commenting.EmptyComment"/>
+
+</ruleset>
