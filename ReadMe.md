@@ -1,6 +1,6 @@
 ### Install
 
-    $ git clone https://github.com/yariks0n/MinKitTest.git
+    $ git clone https://github.com/yariks0n/MindKitTest.git
     $ cd MinKitTest
     $ make up
 

@@ -63,10 +63,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
-    #[Groups(['user:create', 'user:read'])]
+    #[Groups(['user:create'])]
     private ?string $password = null;
 
-    #[Groups(['user:create', 'user:read'])]
+    #[Groups(['user:create'])]
     #[SerializedName('password')]
     #[Assert\NotCompromisedPassword]
     private ?string $plainPassword = null;

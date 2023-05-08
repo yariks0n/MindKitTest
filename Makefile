@@ -12,14 +12,14 @@ env-files:
 	cp .env.test.dist .env.test
 
 db-prepare: env-files
-	docker-compose exec app php bin/console doctrine:migrations:migrate --no-interaction || (docker-compose logs --tail=10 app && @echo "${RED}Composer install is already running!\nPlease wait while the symfony core is installed${NC}\n" && false)
+	docker-compose exec app php bin/console doctrine:migrations:migrate --no-interaction || (docker-compose logs --tail=10 app && printf "${RED}Composer install is already running!\nPlease wait while the symfony core is installed...${NC}\n" && false)
 
 fixtures: db-prepare
 	docker-compose exec app php bin/console doctrine:fixtures:load --no-interaction
 
 jwt:
 	php bin/console lexik:jwt:generate-keypair --overwrite --no-interaction
-	@printf "$(GREEN)The Web server is ready http://127.0.0.1/api\n"
+	@printf "$(GREEN)The Web server is ready${NC} http://127.0.0.1/api\n"
 
 unit-tests:
 	php bin/phpunit tests/Unit
