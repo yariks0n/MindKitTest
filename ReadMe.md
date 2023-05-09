@@ -1,7 +1,7 @@
 ### Install
 
     $ git clone https://github.com/yariks0n/MindKitTest.git
-    $ cd MinKitTest
+    $ cd MindKitTest
     $ make up
 
 ### Prepare env
